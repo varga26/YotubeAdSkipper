@@ -1,0 +1,130 @@
+/* style.css */
+
+/* 1. Outer background (darker/gray) */
+body {
+  width: 300px;  /* Width of the entire extension window */
+  height: 400px; /* Height of the window */
+  margin: 0;
+
+  /* Padding for the card from window edges */
+  padding: 15px; 
+  
+  /* Background color around the card */
+  background-color: #e9ecef;
+  
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  display: flex;         /* Added to center the card if needed */
+  flex-direction: column;
+}
+
+/* 2. Inner card (white) */
+.card-container {
+  /* Takes all available width and height */
+  width: 100%;
+  height: 100%;
+  
+  /* White color for the card */
+  background-color: #ffffff;
+  
+  /* Rounded corners */
+  border-radius: 20px;
+  
+  /* Shadow */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  
+  /* Content alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; 
+  box-sizing: border-box;
+}
+
+/* Heading */
+h1 {
+  font-size: 18px;
+  color: #212529;
+  margin: 10px 0 25px 0;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Button */
+#analyzeBtn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #be0c0c 0%, #e62424 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(190, 12, 12, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#analyzeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(190, 12, 12, 0.4);
+}
+
+#analyzeBtn:active {
+  transform: translateY(0);
+}
+
+/* Result */
+#result {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #868e96;
+  font-weight: 500;
+  background-color: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+/* Logo */
+#bottom-logo {
+  width: 110px;
+  height: auto;
+  
+  /* Best way to push it to the bottom in a Flex container */
+  margin-top: auto; 
+  
+  opacity: 0.8;
+  filter: grayscale(50%);
+  transition: all 0.5s ease; /* Added ease for smoothness */
+}
+
+#bottom-logo:hover {
+  opacity: 1; /* Corrected: max is 1 */
+  filter: grayscale(0%); /* Remove grayscale completely */
+  transform: scale(1.1) rotate(5deg); /* scale 1.5 was too much, 1.1 looks better */
+}
+
+/* 1. Button in "Stop" mode (When program is running) */
+#analyzeBtn.state-running {
+  background: #333333; /* Black/Dark gray */
+  box-shadow: none;    /* Remove bright shadow */
+}
+
+#analyzeBtn.state-running:hover {
+  background: #000000;
+}
+
+/* 2. Status text: Active (Green) */
+.status-active {
+  color: #28a745 !important; /* Green */
+  font-weight: 700;
+}
+
+/* 3. Status text: Error (Red) */
+.status-error {
+  color: #dc3545 !important; /* Red */
+}
+
+/* 4. Status text: Waiting (Gray - default) */
+/* (Special class not needed, as this is default #result style) */

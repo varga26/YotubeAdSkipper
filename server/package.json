@@ -1,0 +1,22 @@
+{
+  "name": "background",
+  "version": "1.0.0",
+  "main": "backround.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@osiris-ai/youtube-captions-sdk": "^0.1.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "youtube-captions-scraper": "^2.0.3"
+  }
+}
