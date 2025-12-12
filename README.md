@@ -1,146 +1,194 @@
-# YouTube AI Ad Skipper 🚀
+🎯 YouTube AI Ad Skipper
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
-![Platform](https://img.shields.io/badge/platform-Chrome%20Extension-orange.svg)
-![AI Powered](https://img.shields.io/badge/AI-Gemini%20Flash-purple.svg)
+Smart Ad Remover – Let AI watch the ads so you don't have to
 
-> **Reclaim your viewing experience.**  
-> An intelligent Chrome extension that uses Google Gemini AI to analyze YouTube subtitles and automatically skip in-video sponsorships, self-promotions, and filler content.
+Show Image
+Show Image
+Show Image
+Show Image
+A powerful browser extension that leverages Google Gemini AI to automatically detect and skip sponsored segments in YouTube videos. No more manually scrubbing through sponsorships, self-promotions, or embedded ads—let artificial intelligence handle it for you.
 
----
+📸 Demo
+<div align="center">
+  <img src="https://via.placeholder.com/800x450/667085/FFFFFF/?text=Demo+GIF+Here" alt="Demo Preview" width="100%">
+  <p><em>Watch the extension intelligently skip sponsor segments in real-time</em></p>
+</div>
 
-## 📸 Demo
+🚀 How It Works
+mermaidgraph LR
+    A[YouTube Page] -->|Video ID| B[Chrome Extension]
+    B -->|Request Analysis| C[Local Server]
+    C -->|Fetch Subtitles| D[YouTube API]
+    C -->|Analyze Text| E[Google Gemini AI]
+    E -->|Ad Segments| C
+    C -->|Cache in SQLite| F[Database]
+    C -->|Return Segments| B
+    B -->|Auto-Skip| A
 
-![Demo of Ad Skipper](https://via.placeholder.com/800x400?text=Insert+Your+Demo+GIF+Here)
+User opens a YouTube video → Extension extracts the video ID
+Extension requests analysis → Server checks cache or fetches subtitles
+Gemini AI processes subtitles → Identifies sponsor segments with timestamps
+Results are cached → Future loads are instant
+Extension auto-skips ads → Seamless viewing experience
 
-> Replace this placeholder with a real screenshot or GIF of the extension in action.
 
----
+✨ Features
 
-## 🧐 How It Works
+🧠 AI-Powered Detection – Gemini 2.5 Flash analyzes subtitles to find sponsorships, self-promos, and embedded ads
+⏭️ Automatic Skipping – Jumps over detected segments in real-time
+🔄 SPA Navigation Support – Works seamlessly when switching videos (YouTube's Single Page App)
+💾 Smart Caching – Stores analyzed segments in SQLite for instant subsequent loads
+🖱️ Manual Control – Start/Stop button with visual status indicators
+🌐 Multi-Language Support – Works with English, German, French, Spanish, and more
+🎨 Modern UI – Clean, intuitive popup interface with smooth animations
+⚡ Performance Optimized – Minimal resource usage, runs only when needed
 
-This project uses a **Client–Server architecture** to offload AI processing from the browser.
 
-```mermaid
-graph LR
-    A[Chrome Extension] -->|1. Send Video ID| B[Node.js Server]
-    B -->|2. Fetch Subtitles| C[YouTube API]
-    B -->|3. Analyze Text| D[Google Gemini AI]
-    D -->|4. Ad Segments| B
-    B -->|5. Store Result| E[SQLite Cache]
-    B -->|6. Return Timestamps| A
-    A -->|7. Auto-Skip| F[YouTube Player]
-Flow Explanation
-Detection – You click Start on a YouTube video.
-
-Analysis – The extension sends the video ID to the local Node.js server.
-
-AI Processing – Subtitles are analyzed by Gemini 2.5 Flash using a custom prompt.
-
-Caching – Results are stored in a local SQLite database.
-
-Action – The extension receives timestamps and automatically skips detected segments.
-
-✨ Key Features
-🧠 AI-Powered Analysis
-Uses Gemini 2.5 Flash to understand context, not just keywords.
-
-⏭️ Smart Skipping
-Automatically skips sponsorships and self-promotions.
-
-🔄 SPA Support
-Fully compatible with YouTube’s Single Page Application navigation.
-
-🖱️ Manual Control
-Simple Start / Stop toggle with live status indicators.
-
-⚡ Intelligent Caching
-Videos are analyzed once and reused instantly in the future.
-
-🛠️ Tech Stack
-Component	Technologies
-Client	Chrome Extension (Manifest V3), Vanilla JS, HTML5, CSS3
-Server	Node.js, Express.js
-AI Engine	Google Gemini API (gemini-2.5-flash)
-Database	SQLite (Sequelize ORM)
-Utilities	youtube-transcript-plus, node-fetch
-
-🚀 Installation
+📦 Installation
 Prerequisites
-Node.js v18+
 
-Google Gemini API Key
-
+Node.js v18 or higher
 Google Chrome (or Chromium-based browser)
+Google Gemini API Key (Get one here)
 
-1️⃣ Server Setup
-The backend handles AI communication.
+Server Setup
 
-bash
-Копировать код
-git clone https://github.com/varga26/YotubeAdSkipper.git
-cd YotubeAdSkipper/server
-npm install
-Create a .env file (or edit config.js) and add your API key:
+Clone the repository
 
-env
-Копировать код
-GEMINI_API_KEY=your_api_key_here
-Start the server:
+bash   git clone https://github.com/yourusername/youtube-ai-ad-skipper.git
+   cd youtube-ai-ad-skipper
 
-bash
-Копировать код
-node background.js
-Server will run at:
-👉 http://localhost:3000
+Navigate to the server directory
 
-2️⃣ Extension Setup
-Open Chrome and go to: chrome://extensions/
+bash   cd background
 
-Enable Developer mode
+Install dependencies
 
-Click Load unpacked
+bash   npm install
 
-Select the extension/ folder
+Configure environment variables
+Create a .env file in the background folder:
 
-The YouTube AI Ad Skipper icon should appear in your toolbar.
+env   GEMINI_API_KEY=your_gemini_api_key_here
 
-📖 Usage Guide
-Open YouTube
+Start the server
 
-Start any video
+bash   node background.js
+```
+   
+   The server will run on `http://localhost:3000`
 
-Click the extension icon
+### Chrome Extension Setup
 
-Press Start
+1. **Open Chrome Extensions page**
+   
+   Navigate to `chrome://extensions/` or click the puzzle icon → Manage Extensions
 
-Status meanings:
-Running... → AI is analyzing the video
+2. **Enable Developer Mode**
+   
+   Toggle the switch in the top-right corner
 
-Active! Skipping X segments → Sponsor segments detected
+3. **Load the extension**
+   
+   Click **"Load unpacked"** and select the project root folder (containing `manifest.json`)
 
-Error → Something went wrong (check server)
+4. **Verify installation**
+   
+   You should see the extension icon appear in your toolbar
 
-▶️ Enjoy uninterrupted viewing
-⏹️ Click Stop to disable skipping at any time
+---
 
-📂 Project Structure
-plaintext
-Копировать код
-youtube-ai-skipper/
-├── extension/             # Client-side code
-│   ├── manifest.json      # Chrome V3 Manifest
-│   ├── popup.html         # Extension UI
-│   ├── style.css          # UI Styling
-│   ├── popup.js           # UI Logic
-│   ├── content.js         # Video Player Controller
-│   ├── background.js      # Extension Service Worker
-│   └── icon.png           # Logo
+## 🎮 Usage Guide
+
+### Starting the Ad Skipper
+
+1. **Open any YouTube video**
+   
+   Navigate to a video with subtitles/captions available
+
+2. **Click the extension icon**
+   
+   The popup will open showing the current status
+
+3. **Press "Start"**
+   
+   The extension will:
+   - Analyze the video subtitles using AI
+   - Detect all sponsor segments
+   - Begin automatically skipping them
+
+4. **Status Indicators**
+   - 🟢 **Active** – Monitoring and skipping ads
+   - ⚫ **Stopped** – Not currently active
+   - 🔴 **Error** – Refresh the page and try again
+
+### Stopping the Ad Skipper
+
+Simply click the extension icon again and press **"Stop"**. The extension will remain inactive until you manually start it again.
+
+### Navigation Between Videos
+
+The extension **automatically continues working** when you click on a new video—no need to restart it manually!
+
+---
+
+## 📂 Project Structure
+```
+youtube-ai-ad-skipper/
 │
-└── server/                # Backend code
-    ├── background.js      # Express server entry point
-    ├── config.js          # DB & API configuration
-    ├── prompt.js          # Gemini system prompt
-    ├── database.sqlite    # Local cache (auto-generated)
-    └── package.json       # Dependencies
+├── background/                 # Server-side code
+│   ├── background.js          # Express server + API endpoints
+│   ├── config.js              # Database configuration (Sequelize)
+│   ├── model.js               # AdSegment model definition
+│   ├── promt.js               # Gemini API prompt template
+│   ├── package.json           # Server dependencies
+│   └── .env                   # Environment variables (not tracked)
+│
+├── background.js              # Extension background service worker
+├── content.js                 # Content script (runs on YouTube pages)
+├── popup.html                 # Extension popup UI
+├── popup.css                  # Popup styling
+├── popup.js                   # Popup logic
+├── manifest.json              # Chrome extension manifest (V3)
+├── icon.png                   # Extension icon
+│
+└── README.md                  # You are here!
+
+🛠️ Technologies Used
+Client-Side
+
+Vanilla JavaScript – No frameworks, pure performance
+Chrome Extension Manifest V3 – Modern extension architecture
+HTML5/CSS3 – Clean, responsive UI
+
+Server-Side
+
+Node.js + Express – RESTful API server
+SQLite + Sequelize – Lightweight database with ORM
+Google Gemini API – Advanced AI text analysis
+YouTube Transcript APIs – Subtitle fetching
+
+
+🔮 Roadmap & Future Plans
+
+ Firefox Support – Port to Firefox WebExtensions
+ Custom Skip Rules – Let users define their own patterns
+ Community Database – Share analyzed segments across users
+ Machine Learning Training – Improve detection accuracy over time
+ Mobile Support – Kiwi Browser / Firefox Mobile compatibility
+ Video Chapters Integration – Respect manual chapter markers
+ Whitelist/Blacklist – Skip ads only on specific channels
+ Statistics Dashboard – Track total time saved
+
+
+🤝 Contributing
+Contributions are welcome! Here's how you can help:
+
+Fork the repository
+Create a feature branch (git checkout -b feature/AmazingFeature)
+Commit your changes (git commit -m 'Add some AmazingFeature')
+Push to the branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+
+Please ensure your code follows the existing style and includes appropriate comments.
+
