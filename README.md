@@ -1,21 +1,19 @@
-🎯 YouTube AI Ad Skipper
+# 🎯 YouTube AI Ad Skipper
 
-Smart Ad Remover – Let AI watch the ads so you don't have to
+> **Smart Ad Remover** – Let AI watch the ads so you don't have to
 
-Show Image
-Show Image
-Show Image
-Show Image
-A powerful browser extension that leverages Google Gemini AI to automatically detect and skip sponsored segments in YouTube videos. No more manually scrubbing through sponsorships, self-promotions, or embedded ads—let artificial intelligence handle it for you.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-v18+-green.svg)](https://nodejs.org/)
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-red.svg)](https://developer.chrome.com/docs/extensions/)
+[![Powered by Gemini](https://img.shields.io/badge/AI-Google%20Gemini-4285F4.svg)](https://ai.google.dev/)
 
-📸 Demo
-<div align="center">
-  <img src="https://via.placeholder.com/800x450/667085/FFFFFF/?text=Demo+GIF+Here" alt="Demo Preview" width="100%">
-  <p><em>Watch the extension intelligently skip sponsor segments in real-time</em></p>
-</div>
+A powerful browser extension that leverages **Google Gemini AI** to automatically detect and skip sponsored segments in YouTube videos. No more manually scrubbing through sponsorships, self-promotions, or embedded ads—let artificial intelligence handle it for you.
 
-🚀 How It Works
-mermaidgraph LR
+---
+
+## 🚀 How It Works
+```mermaid
+graph LR
     A[YouTube Page] -->|Video ID| B[Chrome Extension]
     B -->|Request Analysis| C[Local Server]
     C -->|Fetch Subtitles| D[YouTube API]
@@ -24,56 +22,65 @@ mermaidgraph LR
     C -->|Cache in SQLite| F[Database]
     C -->|Return Segments| B
     B -->|Auto-Skip| A
+```
 
-User opens a YouTube video → Extension extracts the video ID
-Extension requests analysis → Server checks cache or fetches subtitles
-Gemini AI processes subtitles → Identifies sponsor segments with timestamps
-Results are cached → Future loads are instant
-Extension auto-skips ads → Seamless viewing experience
+1. **User opens a YouTube video** → Extension extracts the video ID
+2. **Extension requests analysis** → Server checks cache or fetches subtitles
+3. **Gemini AI processes subtitles** → Identifies sponsor segments with timestamps
+4. **Results are cached** → Future loads are instant
+5. **Extension auto-skips ads** → Seamless viewing experience
 
+---
 
-✨ Features
+## ✨ Features
 
-🧠 AI-Powered Detection – Gemini 2.5 Flash analyzes subtitles to find sponsorships, self-promos, and embedded ads
-⏭️ Automatic Skipping – Jumps over detected segments in real-time
-🔄 SPA Navigation Support – Works seamlessly when switching videos (YouTube's Single Page App)
-💾 Smart Caching – Stores analyzed segments in SQLite for instant subsequent loads
-🖱️ Manual Control – Start/Stop button with visual status indicators
-🌐 Multi-Language Support – Works with English, German, French, Spanish, and more
-🎨 Modern UI – Clean, intuitive popup interface with smooth animations
-⚡ Performance Optimized – Minimal resource usage, runs only when needed
+- 🧠 **AI-Powered Detection** – Gemini 2.5 Flash analyzes subtitles to find sponsorships, self-promos, and embedded ads
+- ⏭️ **Automatic Skipping** – Jumps over detected segments in real-time
+- 🔄 **SPA Navigation Support** – Works seamlessly when switching videos (YouTube's Single Page App)
+- 💾 **Smart Caching** – Stores analyzed segments in SQLite for instant subsequent loads
+- 🖱️ **Manual Control** – Start/Stop button with visual status indicators
+- 🌐 **Multi-Language Support** – Works with English, German, French, Spanish, and more
+- 🎨 **Modern UI** – Clean, intuitive popup interface with smooth animations
+- ⚡ **Performance Optimized** – Minimal resource usage, runs only when needed
 
+---
 
-📦 Installation
-Prerequisites
+## 📦 Installation
 
-Node.js v18 or higher
-Google Chrome (or Chromium-based browser)
-Google Gemini API Key (Get one here)
+### Prerequisites
 
-Server Setup
+- **Node.js** v18 or higher
+- **Google Chrome** (or Chromium-based browser)
+- **Google Gemini API Key** ([Get one here](https://ai.google.dev/))
 
-Clone the repository
+### Server Setup
 
-bash   git clone https://github.com/yourusername/youtube-ai-ad-skipper.git
+1. **Clone the repository**
+```bash
+   git clone https://github.com/yourusername/youtube-ai-ad-skipper.git
    cd youtube-ai-ad-skipper
+```
 
-Navigate to the server directory
+2. **Navigate to the server directory**
+```bash
+   cd background
+```
 
-bash   cd background
+3. **Install dependencies**
+```bash
+   npm install
+```
 
-Install dependencies
+4. **Configure environment variables**
+   
+   Create a `.env` file in the `background` folder:
+```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-bash   npm install
-
-Configure environment variables
-Create a .env file in the background folder:
-
-env   GEMINI_API_KEY=your_gemini_api_key_here
-
-Start the server
-
-bash   node background.js
+5. **Start the server**
+```bash
+   node background.js
 ```
    
    The server will run on `http://localhost:3000`
@@ -153,42 +160,54 @@ youtube-ai-ad-skipper/
 ├── icon.png                   # Extension icon
 │
 └── README.md                  # You are here!
+```
 
-🛠️ Technologies Used
-Client-Side
+---
 
-Vanilla JavaScript – No frameworks, pure performance
-Chrome Extension Manifest V3 – Modern extension architecture
-HTML5/CSS3 – Clean, responsive UI
+## 🛠️ Technologies Used
 
-Server-Side
+### Client-Side
+- **Vanilla JavaScript** – No frameworks, pure performance
+- **Chrome Extension Manifest V3** – Modern extension architecture
+- **HTML5/CSS3** – Clean, responsive UI
 
-Node.js + Express – RESTful API server
-SQLite + Sequelize – Lightweight database with ORM
-Google Gemini API – Advanced AI text analysis
-YouTube Transcript APIs – Subtitle fetching
+### Server-Side
+- **Node.js + Express** – RESTful API server
+- **SQLite + Sequelize** – Lightweight database with ORM
+- **Google Gemini API** – Advanced AI text analysis
+- **YouTube Transcript APIs** – Subtitle fetching
 
+---
 
-🔮 Roadmap & Future Plans
+## 🔮 Roadmap & Future Plans
 
- Firefox Support – Port to Firefox WebExtensions
- Custom Skip Rules – Let users define their own patterns
- Community Database – Share analyzed segments across users
- Machine Learning Training – Improve detection accuracy over time
- Mobile Support – Kiwi Browser / Firefox Mobile compatibility
- Video Chapters Integration – Respect manual chapter markers
- Whitelist/Blacklist – Skip ads only on specific channels
- Statistics Dashboard – Track total time saved
+- [ ] **Firefox Support** – Port to Firefox WebExtensions
+- [ ] **Custom Skip Rules** – Let users define their own patterns
+- [ ] **Community Database** – Share analyzed segments across users
+- [ ] **Machine Learning Training** – Improve detection accuracy over time
+- [ ] **Mobile Support** – Kiwi Browser / Firefox Mobile compatibility
+- [ ] **Video Chapters Integration** – Respect manual chapter markers
+- [ ] **Whitelist/Blacklist** – Skip ads only on specific channels
+- [ ] **Statistics Dashboard** – Track total time saved
 
+---
 
-🤝 Contributing
-Contributions are welcome! Here's how you can help:
+## 📄 License
 
-Fork the repository
-Create a feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
-Please ensure your code follows the existing style and includes appropriate comments.
+---
 
+## 🌟 Acknowledgments
+
+- **Google Gemini** – For providing the AI analysis engine
+- **YouTube** – For the subtitle APIs
+- **Open Source Community** – For inspiration and libraries
+
+---
+
+<div align="center">
+  <strong>Made with ❤️ by developers who hate ads</strong>
+  
+  ⭐ Star this repo if you found it useful!
+</div>
